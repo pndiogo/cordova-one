@@ -1,0 +1,27 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    }
+  },
+  "dependent_plugins": {}
+}
