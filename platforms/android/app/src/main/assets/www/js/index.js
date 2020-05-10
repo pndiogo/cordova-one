@@ -16,7 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = {
+
+const app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);

@@ -1,11 +1,11 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "CordovaOne",
-  "short_name": "CordovaOne",
+  "name": "Cordova One",
+  "short_name": "Cordova One",
   "version": "dev.diogo.paulo.cordovaone",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "author": "Apache Cordova Team",
+  "author": "Paulo Diogo",
   "icons": [],
   "start_url": "index.html"
 }
