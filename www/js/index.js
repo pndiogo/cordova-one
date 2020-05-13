@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 const app = {
     // Application Constructor
     initialize: function() {
@@ -26,7 +27,6 @@ const app = {
             document.addEventListener('DOMContentLoaded', app.onDeviceReady);
             console.log('addEventListener DOMContentLoaded');
         }
-        
     },
 
     // deviceready Event Handler

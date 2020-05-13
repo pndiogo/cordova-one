@@ -16,6 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+<<<<<<< HEAD
+=======
+
+>>>>>>> adc0a9d7bc1eb73ee2efaa599274a24b163398df
 const app = {
     // Application Constructor
     initialize: function() {
@@ -46,8 +50,12 @@ const app = {
             pauseResumeParagraph.textContent = 'App has never been paused';
         }
 
+<<<<<<< HEAD
         const deviceParagraph = document.querySelector('#device p');
         deviceParagraph.innerHTML = `
+=======
+        p.innerHTML = `
+>>>>>>> adc0a9d7bc1eb73ee2efaa599274a24b163398df
             Cordova version: ${device.cordova}<br>
             Device platform: ${device.platform}<br>
             Device model: ${device.model}<br>
@@ -64,8 +72,13 @@ const app = {
         window.addEventListener("batterystatus", this.onBatteryStatus, false);
 
 
+<<<<<<< HEAD
         const cameraButton = document.getElementById("cameraTakePicture");
         cameraButton.addEventListener("click", cameraTakePicture);
+=======
+        const c = document.getElementById("cameraTakePicture");
+        c.addEventListener("click", cameraTakePicture);
+>>>>>>> adc0a9d7bc1eb73ee2efaa599274a24b163398df
 
         function cameraTakePicture() {
             navigator.camera.getPicture(onSuccess, onFail, {

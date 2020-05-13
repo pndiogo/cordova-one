@@ -16,6 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+<<<<<<< HEAD
+=======
+
+>>>>>>> adc0a9d7bc1eb73ee2efaa599274a24b163398df
 const app = {
     // Application Constructor
     initialize: function() {

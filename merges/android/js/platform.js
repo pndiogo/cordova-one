@@ -1,0 +1,1 @@
+alert('Inside Android platform.js')
