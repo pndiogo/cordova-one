@@ -16,10 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = {
+const app = {
     // Application Constructor
     initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        if (window.hasOwnProperty('cordova')) {
+            document.addEventListener('deviceready', this.onDeviceReady.bind(this));
+            console.log('addEventListener deviceready');
+        } else {
+            document.addEventListener('DOMContentLoaded', this.onDeviceReady.bind(this));
+            console.log('addEventListener DOMContentLoaded');
+        }
+        
     },
 
     // deviceready Event Handler
@@ -30,9 +37,17 @@ var app = {
         console.log('deviceready');
         this.receivedEvent('deviceready');
 
-        const p = document.querySelector('#device p');
+        const pauseResumeParagraph = document.querySelector('#pause-resume p');
+        const data = localStorage.getItem('PauseApp');
+        if (data) {
+            let time = new Date(JSON.parse(data).timestamp);
+            pauseResumeParagraph.textContent = `App was last paused at ${time.toLocaleString()}`;
+        } else {
+            pauseResumeParagraph.textContent = 'App has never been paused';
+        }
 
-        p.innerHTML = `
+        const deviceParagraph = document.querySelector('#device p');
+        deviceParagraph.innerHTML = `
             Cordova version: ${device.cordova}<br>
             Device platform: ${device.platform}<br>
             Device model: ${device.model}<br>
@@ -43,14 +58,14 @@ var app = {
             Device serial: ${device.serial}<br>
         `;
 
-        const v = document.querySelector('#vibrate button');
-        v.addEventListener('click', this.vibrate);
+        const vibrateButton = document.querySelector('#vibrate button');
+        vibrateButton.addEventListener('click', this.vibrate);
 
         window.addEventListener("batterystatus", this.onBatteryStatus, false);
 
 
-        const c = document.getElementById("cameraTakePicture");
-        c.addEventListener("click", cameraTakePicture);
+        const cameraButton = document.getElementById("cameraTakePicture");
+        cameraButton.addEventListener("click", cameraTakePicture);
 
         function cameraTakePicture() {
             navigator.camera.getPicture(onSuccess, onFail, {

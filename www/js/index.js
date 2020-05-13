@@ -16,10 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = {
+const app = {
     // Application Constructor
     initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        if (window.hasOwnProperty('cordova')) {
+            document.addEventListener('deviceready', app.onDeviceReady);
+            console.log('addEventListener deviceready');
+        } else {
+            document.addEventListener('DOMContentLoaded', app.onDeviceReady);
+            console.log('addEventListener DOMContentLoaded');
+        }
+        
     },
 
     // deviceready Event Handler
@@ -30,9 +37,21 @@ var app = {
         console.log('deviceready');
         this.receivedEvent('deviceready');
 
-        const p = document.querySelector('#device p');
+        //listen for pause and resume events
+        document.addEventListener('pause', app.paused);
+        document.addEventListener('resume', app.resumed);
 
-        p.innerHTML = `
+        const pauseResumeParagraph = document.querySelector('#pause-resume p');
+        const data = localStorage.getItem('PauseApp');
+        if (data) {
+            let time = new Date(JSON.parse(data).timestamp);
+            pauseResumeParagraph.textContent = `App was last paused at ${time.toLocaleString()}`;
+        } else {
+            pauseResumeParagraph.textContent = 'App has never been paused';
+        }
+
+        const deviceParagraph = document.querySelector('#device p');
+        deviceParagraph.innerHTML = `
             Cordova version: ${device.cordova}<br>
             Device platform: ${device.platform}<br>
             Device model: ${device.model}<br>
@@ -43,14 +62,14 @@ var app = {
             Device serial: ${device.serial}<br>
         `;
 
-        const v = document.querySelector('#vibrate button');
-        v.addEventListener('click', this.vibrate);
+        const vibrateButton = document.querySelector('#vibrate button');
+        vibrateButton.addEventListener('click', this.vibrate);
 
         window.addEventListener("batterystatus", this.onBatteryStatus, false);
 
 
-        const c = document.getElementById("cameraTakePicture");
-        c.addEventListener("click", cameraTakePicture);
+        const cameraButton = document.getElementById("cameraTakePicture");
+        cameraButton.addEventListener("click", cameraTakePicture);
 
         function cameraTakePicture() {
             navigator.camera.getPicture(onSuccess, onFail, {
@@ -71,7 +90,6 @@ var app = {
         }
 
     },
-
     vibrate: function() {
         navigator.vibrate(3000)
     },
@@ -89,6 +107,23 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    paused: function (ev) {
+        console.dir(ev);
+        //save the  current timeStamp in localstorage
+        const obj = { 'timestamp': Date.now() };
+        localStorage.setItem('PauseApp', JSON.stringify(obj));
+    },
+    resumed: function (ev) {
+        console.dir(ev);
+        const data = localStorage.getItem('PauseApp');
+        if (data) {
+            const pauseResumeParagraph = document.querySelector('#pause-resume p');
+            const time = new Date(JSON.parse(data).timestamp);
+            pauseResumeParagraph.textContent = `App was last paused at ${time.toLocaleString()}`;
+        } else {
+            pauseResumeParagraph.textContent = 'App has never been paused';
+        }
     }
 };
 
