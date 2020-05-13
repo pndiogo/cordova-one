@@ -16,18 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-<<<<<<< HEAD
-=======
-
->>>>>>> adc0a9d7bc1eb73ee2efaa599274a24b163398df
 const app = {
     // Application Constructor
     initialize: function() {
         if (window.hasOwnProperty('cordova')) {
-            document.addEventListener('deviceready', this.onDeviceReady.bind(this));
+            document.addEventListener('deviceready', app.onDeviceReady.bind(this));
             console.log('addEventListener deviceready');
         } else {
-            document.addEventListener('DOMContentLoaded', this.onDeviceReady.bind(this));
+            document.addEventListener('DOMContentLoaded', app.onDeviceReady.bind(this));
             console.log('addEventListener DOMContentLoaded');
         }
         
@@ -40,6 +36,10 @@ const app = {
     onDeviceReady: function() {
         console.log('deviceready');
         this.receivedEvent('deviceready');
+
+        //listen for pause and resume events
+        document.addEventListener('pause', app.paused);
+        document.addEventListener('resume', app.resumed);
 
         const pauseResumeParagraph = document.querySelector('#pause-resume p');
         const data = localStorage.getItem('PauseApp');
@@ -90,7 +90,6 @@ const app = {
         }
 
     },
-
     vibrate: function() {
         navigator.vibrate(3000)
     },
@@ -100,14 +99,31 @@ const app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+        const parentElement = document.getElementById(id);
+        const listeningElement = parentElement.querySelector('.listening');
+        const receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    paused: function (ev) {
+        console.dir(ev);
+        //save the  current timeStamp in localstorage
+        const obj = { 'timestamp': Date.now() };
+        localStorage.setItem('PauseApp', JSON.stringify(obj));
+    },
+    resumed: function (ev) {
+        console.dir(ev);
+        const data = localStorage.getItem('PauseApp');
+        if (data) {
+            const pauseResumeParagraph = document.querySelector('#pause-resume p');
+            const time = new Date(JSON.parse(data).timestamp);
+            pauseResumeParagraph.textContent = `App was last paused at ${time.toLocaleString()}`;
+        } else {
+            pauseResumeParagraph.textContent = 'App has never been paused';
+        }
     }
 };
 

@@ -16,17 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 const app = {
     // Application Constructor
     initialize: function() {
         if (window.hasOwnProperty('cordova')) {
-            document.addEventListener('deviceready', app.onDeviceReady);
+            document.addEventListener('deviceready', app.onDeviceReady.bind(this));
             console.log('addEventListener deviceready');
         } else {
-            document.addEventListener('DOMContentLoaded', app.onDeviceReady);
+            document.addEventListener('DOMContentLoaded', app.onDeviceReady.bind(this));
             console.log('addEventListener DOMContentLoaded');
         }
+        
     },
 
     // deviceready Event Handler
@@ -99,9 +99,9 @@ const app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+        const parentElement = document.getElementById(id);
+        const listeningElement = parentElement.querySelector('.listening');
+        const receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');

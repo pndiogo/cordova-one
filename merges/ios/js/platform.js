@@ -1,0 +1,1 @@
+alert('Inside iOS platform.js')
