@@ -37,7 +37,7 @@ const app = {
         console.log('deviceready');
         this.receivedEvent('deviceready');
 
-        //listen for pause and resume events
+        // listen for pause and resume events
         document.addEventListener('pause', app.paused);
         document.addEventListener('resume', app.resumed);
 
@@ -49,7 +49,8 @@ const app = {
         } else {
             pauseResumeParagraph.textContent = 'App has never been paused';
         }
-
+        
+        // device plugin
         const deviceParagraph = document.querySelector('#device p');
         deviceParagraph.innerHTML = `
             Cordova version: ${device.cordova}<br>
@@ -62,12 +63,19 @@ const app = {
             Device serial: ${device.serial}<br>
         `;
 
+        // vibration plugin
         const vibrateButton = document.querySelector('#vibrate button');
         vibrateButton.addEventListener('click', this.vibrate);
 
+        // dialog plugin
+        document.querySelector('#dialog-alert').addEventListener('click', app.showAlert);
+        document.querySelector('#dialog-confirm').addEventListener('click', app.showConfirm);
+        document.querySelector('#dialog-prompt').addEventListener('click', app.showPrompt);
+
+        // battery-status plugin
         window.addEventListener("batterystatus", this.onBatteryStatus, false);
 
-
+        // cameara plugin
         const cameraButton = document.getElementById("cameraTakePicture");
         cameraButton.addEventListener("click", cameraTakePicture);
 
@@ -90,6 +98,14 @@ const app = {
         }
 
     },
+    showAlert: function(ev) {
+        console.log('showAlert event', ev);
+        const p = ev.currentTarget;
+        navigator.notification.alert('Thanks for clicking', () => {
+            p.style.backgroundColor = 'gold';
+        }, 'Custom Title', 'Dismiss')
+    },
+
     vibrate: function() {
         navigator.vibrate(3000)
     },

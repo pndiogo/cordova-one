@@ -47,6 +47,22 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "navigator.battery"
       ]
+    },
+    {
+      "id": "cordova-plugin-dialogs.notification",
+      "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
+      "merges": [
+        "navigator.notification"
+      ]
+    },
+    {
+      "id": "cordova-plugin-dialogs.notification_android",
+      "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
+      "merges": [
+        "navigator.notification"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -54,6 +70,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-camera": "4.1.0",
     "cordova-plugin-device": "2.0.3",
     "cordova-plugin-vibration": "3.1.1",
-    "cordova-plugin-battery-status": "2.0.3"
+    "cordova-plugin-battery-status": "2.0.3",
+    "cordova-plugin-dialogs": "2.0.2"
   };
 });

@@ -23,6 +23,10 @@
             {
               "xml": "<feature name=\"Battery\"><param name=\"android-package\" value=\"org.apache.cordova.batterystatus.BatteryListener\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -66,6 +70,9 @@
       "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
     },
     "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
     }
   },
@@ -118,6 +125,22 @@
       "clobbers": [
         "navigator.battery"
       ]
+    },
+    {
+      "id": "cordova-plugin-dialogs.notification",
+      "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
+      "merges": [
+        "navigator.notification"
+      ]
+    },
+    {
+      "id": "cordova-plugin-dialogs.notification_android",
+      "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
+      "merges": [
+        "navigator.notification"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -125,6 +148,7 @@
     "cordova-plugin-camera": "4.1.0",
     "cordova-plugin-device": "2.0.3",
     "cordova-plugin-vibration": "3.1.1",
-    "cordova-plugin-battery-status": "2.0.3"
+    "cordova-plugin-battery-status": "2.0.3",
+    "cordova-plugin-dialogs": "2.0.2"
   }
 }

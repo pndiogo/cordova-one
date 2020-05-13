@@ -39,7 +39,8 @@
             content="initial-scale=1, width=device-width, viewport-fit=cover"
         />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <link rel="stylesheet" type="text/css" href="css/platform.css" />
+        <title>Paulo's Cordova App</title>
     </head>
     <body>
         <div class="app">
@@ -59,16 +60,29 @@
                 <button>Vibrate</button>
             </div>
 
-            <div id="battery-status">
+            <div id="dialog-alert">
+                <p>Click on this paragraph to make the 'alert' dialog run.</p>
+            </div>
+
+             <div id="dialog-confirm">
+                <p>Click on this paragraph to make the 'confirm' dialog run.</p>
+            </div>
+
+             <div id="dialog-prompt">
+                <p>Click on this paragraph to make the 'prompt' dialog run.</p>
+            </div>
+
+             <div id="battery-status">
                 <p></p>
             </div>
 
             <div id="camera">
-                <button id="cameraTakePicture">TAKE PICTURE</button>
+                <button id="cameraTakePicture">Take picture</button>
                 <img id="camera-image"></img>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/platform.js"></script>
     </body>
 </html>

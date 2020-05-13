@@ -20,10 +20,10 @@ const app = {
     // Application Constructor
     initialize: function() {
         if (window.hasOwnProperty('cordova')) {
-            document.addEventListener('deviceready', this.onDeviceReady.bind(this));
+            document.addEventListener('deviceready', app.onDeviceReady.bind(this));
             console.log('addEventListener deviceready');
         } else {
-            document.addEventListener('DOMContentLoaded', this.onDeviceReady.bind(this));
+            document.addEventListener('DOMContentLoaded', app.onDeviceReady.bind(this));
             console.log('addEventListener DOMContentLoaded');
         }
         
@@ -37,6 +37,10 @@ const app = {
         console.log('deviceready');
         this.receivedEvent('deviceready');
 
+        // listen for pause and resume events
+        document.addEventListener('pause', app.paused);
+        document.addEventListener('resume', app.resumed);
+
         const pauseResumeParagraph = document.querySelector('#pause-resume p');
         const data = localStorage.getItem('PauseApp');
         if (data) {
@@ -45,7 +49,8 @@ const app = {
         } else {
             pauseResumeParagraph.textContent = 'App has never been paused';
         }
-
+        
+        // device plugin
         const deviceParagraph = document.querySelector('#device p');
         deviceParagraph.innerHTML = `
             Cordova version: ${device.cordova}<br>
@@ -58,12 +63,19 @@ const app = {
             Device serial: ${device.serial}<br>
         `;
 
+        // vibration plugin
         const vibrateButton = document.querySelector('#vibrate button');
         vibrateButton.addEventListener('click', this.vibrate);
 
+        // dialog plugin
+        document.querySelector('#dialog-alert').addEventListener('click', app.showAlert);
+        document.querySelector('#dialog-confirm').addEventListener('click', app.showConfirm);
+        document.querySelector('#dialog-prompt').addEventListener('click', app.showPrompt);
+
+        // battery-status plugin
         window.addEventListener("batterystatus", this.onBatteryStatus, false);
 
-
+        // cameara plugin
         const cameraButton = document.getElementById("cameraTakePicture");
         cameraButton.addEventListener("click", cameraTakePicture);
 
@@ -86,7 +98,36 @@ const app = {
         }
 
     },
-
+    showAlert: function(ev) {
+        console.log('showAlert event', ev);
+        const p = ev.currentTarget;
+        navigator.notification.alert('Thanks for clicking', () => {
+            p.style.backgroundColor = 'gold';
+        }, 'Custom Title', 'Dismiss')
+    },
+    showConfirm: function (ev) {
+        console.log('showConfirm event', ev);
+        const buttons = ['You Betcha', 'Not Yet'];
+        const p = ev.currentTarget;
+        navigator.notification.confirm('Have you ever been to Istanbul?',
+          /*   The callback takes the argument buttonIndex(Number), which is the index of the pressed button.Note that the index uses one - based indexing, so the value is 1, 2 etc. 0 means they closed the dialog without clicking a button */
+            (buttonIndex) => {
+            p.style.backgroundColor = 'pink';
+                p.innerHTML = '<br />You clicked ' + buttons[buttonIndex - 1]
+        }, 'Turkish Tourism', buttons)
+    },
+    showPrompt: function (ev) {
+        console.log('showPrompt event', ev);
+        const buttons = ['Confirm', 'Cancel'];
+        const p = ev.currentTarget;
+        navigator.notification.prompt('Name a country that neighbouts Turkey',
+            (response) => {
+                // response.input1 = what they wrote
+                // response.buttonIndex = the index number of the button they clicked (0 is the X cancel)
+                p.style.backgroundColor = 'purple';
+                p.innerHTML = '<br />You said ' + response.input1;
+            }, 'Geography', buttons, 'Not Poland')
+    },
     vibrate: function() {
         navigator.vibrate(3000)
     },
@@ -96,14 +137,31 @@ const app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+        const parentElement = document.getElementById(id);
+        const listeningElement = parentElement.querySelector('.listening');
+        const receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    paused: function (ev) {
+        console.dir(ev);
+        //save the  current timeStamp in localstorage
+        const obj = { 'timestamp': Date.now() };
+        localStorage.setItem('PauseApp', JSON.stringify(obj));
+    },
+    resumed: function (ev) {
+        console.dir(ev);
+        const data = localStorage.getItem('PauseApp');
+        if (data) {
+            const pauseResumeParagraph = document.querySelector('#pause-resume p');
+            const time = new Date(JSON.parse(data).timestamp);
+            pauseResumeParagraph.textContent = `App was last paused at ${time.toLocaleString()}`;
+        } else {
+            pauseResumeParagraph.textContent = 'App has never been paused';
+        }
     }
 };
 

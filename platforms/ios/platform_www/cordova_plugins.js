@@ -55,6 +55,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "merges": [
         "navigator"
       ]
+    },
+    {
+      "id": "cordova-plugin-dialogs.notification",
+      "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
+      "merges": [
+        "navigator.notification"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -62,6 +70,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-camera": "4.1.0",
     "cordova-plugin-device": "2.0.3",
     "cordova-plugin-vibration": "3.1.1",
-    "cordova-plugin-whitelist": "1.3.4"
+    "cordova-plugin-whitelist": "1.3.4",
+    "cordova-plugin-dialogs": "2.0.2"
   };
 });

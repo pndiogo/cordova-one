@@ -21,6 +21,9 @@
     },
     "cordova-plugin-battery-status": {
       "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
     }
   },
   "dependent_plugins": {}

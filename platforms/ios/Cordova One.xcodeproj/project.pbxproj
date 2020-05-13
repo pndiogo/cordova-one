@@ -24,6 +24,8 @@
 		EF04CF1694014E2AA72E9A50 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 72701139855A48FCAF387E1B /* CDVDevice.m */; };
 		38A1E5F1BD064B0399AB5F4D /* CDVVibration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC4DD0CB0F949A5832D2237 /* CDVVibration.m */; };
 		A94634B72BAC49DDAE558B32 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9939EE15B0554FE88EE9F6D5 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		852CA9344D6B4FDBB1429142 /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 598BA9B8E164475AA51C7234 /* CDVNotification.m */; };
+		697F6FE6126848D59C35B2B8 /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DDFF54012C4C49C2895C474A /* CDVNotification.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,9 @@
 		6BC4DD0CB0F949A5832D2237 /* CDVVibration.m */ = {isa = PBXFileReference; name = "CDVVibration.m"; path = "cordova-plugin-vibration/CDVVibration.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		8F323AD7A8594255AF99CC00 /* CDVVibration.h */ = {isa = PBXFileReference; name = "CDVVibration.h"; path = "cordova-plugin-vibration/CDVVibration.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		9939EE15B0554FE88EE9F6D5 /* AudioToolbox.framework */ = {isa = PBXFileReference; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		598BA9B8E164475AA51C7234 /* CDVNotification.m */ = {isa = PBXFileReference; name = "CDVNotification.m"; path = "cordova-plugin-dialogs/CDVNotification.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		4540D9D7704D4079AB7A7643 /* CDVNotification.h */ = {isa = PBXFileReference; name = "CDVNotification.h"; path = "cordova-plugin-dialogs/CDVNotification.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		DDFF54012C4C49C2895C474A /* CDVNotification.bundle */ = {isa = PBXFileReference; name = "CDVNotification.bundle"; path = "CDVNotification.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +167,7 @@
 				3047A50E1AB8057F00498E2A /* config */,
 				8D1107310486CEB800E47090 /* Cordova One-Info.plist */,
 				6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */,
+				DDFF54012C4C49C2895C474A /* CDVNotification.bundle */,
 			);
 			name = Resources;
 			path = "Cordova One/Resources";
@@ -213,6 +219,8 @@
 				D109D210E8B6435B849219D0 /* CDVDevice.h */,
 				6BC4DD0CB0F949A5832D2237 /* CDVVibration.m */,
 				8F323AD7A8594255AF99CC00 /* CDVVibration.h */,
+				598BA9B8E164475AA51C7234 /* CDVNotification.m */,
+				4540D9D7704D4079AB7A7643 /* CDVNotification.h */,
 			);
 			name = Plugins;
 			path = "Cordova One/Plugins";
@@ -306,6 +314,7 @@
 				302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */,
 				0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */,
 				6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */,
+				697F6FE6126848D59C35B2B8 /* CDVNotification.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +352,7 @@
 				2D4EAC82D03A458E8B4AEA62 /* CDVJpegHeaderWriter.m in Sources */,
 				EF04CF1694014E2AA72E9A50 /* CDVDevice.m in Sources */,
 				38A1E5F1BD064B0399AB5F4D /* CDVVibration.m in Sources */,
+				852CA9344D6B4FDBB1429142 /* CDVNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
