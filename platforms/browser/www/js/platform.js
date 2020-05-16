@@ -1,1 +1,0 @@
-alert('Inside Browser platform.js')
