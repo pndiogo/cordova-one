@@ -1,41 +1,44 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
     },
-    "installed_plugins": {
-        "cordova-plugin-battery-status": {
-            "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-        },
-        "cordova-plugin-camera": {
-            "ANDROID_SUPPORT_V4_VERSION": "27.+",
-            "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-        },
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-        },
-        "cordova-plugin-media": {
-            "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-        },
-        "cordova-plugin-vibration": {
-            "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-        }
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
     },
-    "dependent_plugins": {
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-        },
-        "cordova-plugin-app-event": {
-            "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-        }
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
     }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-app-event": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    }
+  }
 }
