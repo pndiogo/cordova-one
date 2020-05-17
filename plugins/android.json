@@ -31,12 +31,12 @@
     },
     "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
-    },
     "cordova-plugin-app-event": {
       "PACKAGE_NAME": "dev.diogo.paulo.cordovaone"
     }

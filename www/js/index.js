@@ -29,6 +29,14 @@ const app = {
             console.log('addEventListener DOMContentLoaded');
         }
 
+        // system file plugin
+        setTimeout(function () {
+            console.log("File system/plugin is ready");
+            app.addFileListeners();
+            //create the folder where we will save files
+            app.getPermFolder();
+        }, 2000);
+
     },
 
     // google maps
@@ -40,6 +48,13 @@ const app = {
             longitude: -75.555
         }
     }, //default location to use if geolocation fails
+
+    // system file plugin
+    tempURL: null,
+    permFolder: null,
+    oldFile: null,
+    permFile: null,
+    KEY: "OLDfileNAMEkey",
 
     // deviceready Event Handler
     //
@@ -55,8 +70,7 @@ const app = {
         document.head.appendChild(s);
         s.addEventListener("load", app.mapScriptReady);
         s.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDOjifEdVjLrVoJCGYp8oMFAAiZlZUfdSs`;
-
-
+        
 
         // listen for pause and resume events
         document.addEventListener('pause', app.paused);
@@ -123,6 +137,7 @@ const app = {
         });
 
         function onSuccess(imageData) {
+            app.tempURL = imageData;
             const cameraImage = document.getElementById('camera-image');
             cameraImage.src = imageData;
 
@@ -449,6 +464,109 @@ const app = {
         console.log("failPosition", err);
         //failed to get the user's location for whatever reason
         app.gotPosition(app.defaultPos);
+    },
+    // system file plugin
+    addFileListeners: () => {
+        document.getElementById("btnFile").addEventListener("click", app.copyImage);
+    },
+    getPermFolder: () => {
+        let path = cordova.file.dataDirectory;
+        //save the reference to the folder as a global app property
+        resolveLocalFileSystemURL(
+            path,
+            dirEntry => {
+                //create the permanent folder
+                dirEntry.getDirectory(
+                    "images",
+                    { create: true },
+                    permDir => {
+                        app.permFolder = permDir;
+                        console.log("Created or opened", permDir.nativeURL);
+                        //check for an old image from last time app ran
+                        app.loadOldImage();
+                    },
+                    err => {
+                        console.warn("failed to create or open permanent image dir");
+                    }
+                );
+            },
+            err => {
+                console.warn("We should not be getting an error yet");
+            }
+        );
+    },
+    loadOldImage: () => {
+        //check localstorage to see if there was an old file stored
+        let oldFilePath = localStorage.getItem(app.KEY);
+        //if there was an old file then load it into the imgFile
+        if (oldFilePath) {
+            resolveLocalFileSystemURL(
+                oldFilePath,
+                oldFileEntry => {
+                    app.oldFileEntry = oldFileEntry;
+                    let img = document.getElementById("imgFile");
+                    img.src = oldFileEntry.nativeURL;
+                },
+                err => {
+                    console.warn(err);
+                }
+            );
+        }
+    },
+    copyImage: ev => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        //copy the temp image to a permanent location
+        let fileName = Date.now().toString() + ".jpg";
+
+        resolveLocalFileSystemURL(
+            app.tempURL,
+            entry => {
+                //we have a reference to the temp file now
+                console.log(entry);
+                console.log("copying", entry.name);
+                console.log(
+                    "copy",
+                    entry.name,
+                    "to",
+                    app.permFolder.nativeURL + fileName
+                );
+                //copy the temp file to app.permFolder
+                entry.copyTo(
+                    app.permFolder,
+                    fileName,
+                    permFile => {
+                        //the file has been copied
+                        //save file name in localstorage
+                        let path = permFile.nativeURL;
+                        localStorage.setItem(app.KEY, path);
+                        app.permFile = permFile;
+                        console.log(permFile);
+                        console.log("add", permFile.nativeURL, "to the 2nd image");
+                        document.getElementById("imgFile").src = permFile.nativeURL;
+                        //delete the old image file in the app.permFolder
+                        if (app.oldFile !== null) {
+                            app.oldFile.remove(
+                                () => {
+                                    console.log("successfully deleted old file");
+                                    //save the current file as the old file
+                                    app.oldFile = permFile;
+                                },
+                                err => {
+                                    console.warn("Delete failure", err);
+                                }
+                            );
+                        }
+                    },
+                    fileErr => {
+                        console.warn("Copy error", fileErr);
+                    }
+                );
+            },
+            err => {
+                console.error(err);
+            }
+        );
     }
 };
 

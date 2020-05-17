@@ -42,7 +42,8 @@
                 "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
             },
             "de.appplant.cordova.plugin.local-notification": {},
-            "cordova-plugin-geolocation": {}
+            "cordova-plugin-geolocation": {},
+            "cordova-plugin-file": {}
         },
         "platforms": [
             "android"
